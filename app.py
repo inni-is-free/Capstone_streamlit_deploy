@@ -14,6 +14,7 @@ warnings.filterwarnings('ignore')
 import gdown
 import matplotlib
 import platform
+import matplotlib.font_manager as fm
 
 
 sns.set_style("whitegrid")
@@ -29,15 +30,41 @@ st.set_page_config(
 
 
 # ---- Korean font settings ----
-system = platform.system()
-if system == "Windows":
-    matplotlib.rc("font", family="Malgun Gothic")   
-elif system == "Darwin":
-    matplotlib.rc("font", family="AppleGothic")     
-else:
-    matplotlib.rc("font", family="NanumGothic")   
+# system = platform.system()
+# if system == "Windows":
+#     matplotlib.rc("font", family="Malgun Gothic")   
+# elif system == "Darwin":
+#     matplotlib.rc("font", family="AppleGothic")     
+# else:
+#     matplotlib.rc("font", family="NanumGothic")  
 
-matplotlib.rc("axes", unicode_minus=False)  
+# -----------------------------------
+# Korean font setup for matplotlib
+# -----------------------------------
+def setup_korean_font():
+    system = platform.system()
+
+    if system == "Windows":
+        # 로컬 PC(윈도우)에서 테스트할 때: 맑은 고딕 사용
+        plt.rcParams["font.family"] = "Malgun Gothic"
+    else:
+        # Streamlit Cloud (Linux)용: Noto Sans CJK KR 다운로드 후 등록
+        font_path = "/tmp/NotoSansCJKkr-Regular.otf"
+        if not os.path.exists(font_path):
+            import urllib.request
+            url = (
+                "https://github.com/googlefonts/noto-cjk/raw/main/Sans/OTF/"
+                "Korean/NotoSansCJKkr-Regular.otf"
+            )
+            urllib.request.urlretrieve(url, font_path)
+
+        fm.fontManager.addfont(font_path)
+        plt.rcParams["font.family"] = "Noto Sans CJK KR"
+
+    
+    plt.rcParams["axes.unicode_minus"] = False
+
+setup_korean_font()
 
 
 # In[2]:
