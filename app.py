@@ -124,6 +124,9 @@ st.markdown(
 """
 This dashboard summarizes my capstone project:
 
+0. **Note** This dashboard uses random data for security purposes.
+  - Therefore, the displayed figures are not the actual values.
+  - We plan to implement the dashboard using real-world data in a production environment in the future.
 1. **EDA** on lease renewals and external housing indices  
 2. **Modeling results** across four scenarios (Logit, XGB, tuned models, ensemble)  
 3. **Final predictions** for contracts expiring in **Nov–Dec 2025**
