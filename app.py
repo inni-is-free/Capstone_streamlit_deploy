@@ -218,7 +218,7 @@ with tab1:
                     st.dataframe(tmp.head(20), use_container_width=True)
 
                 with col4:
-                    fig, ax = plt.subplots(figsize=(6, 3))
+                    fig, ax = plt.subplots(figsize=(5, 3))
                     sns.barplot(
                         data=tmp,
                         x="year",
